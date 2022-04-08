@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Rooms101.Models.RoomViewModel>
+@using Microsoft.AspNetCore.Identity
+@using Rooms101.Areas.Identity.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+
+    var canEdit = (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.AdministratorRole)); 
+}
+
+<h1>Meeting Rooms</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MeetingRoomName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeetingRoomDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                @if(canEdit)
+                {
+                    <a class="btn btn-lg btn-warning" asp-action="Create">Create New</a>
+                }
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingRoomName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingRoomDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                    @if (canEdit)
+                    {
+                        <a class="btn btn-primary mx-1" asp-action="Edit" asp-route-id="@item.MeetingRoomId">Edit</a>
+                    }
+                    <a class="btn btn-info mx-1" asp-action="Details" asp-route-id="@item.MeetingRoomId">Details</a>
+                    @if (canEdit)
+                    {
+                        <a class="btn btn-danger mx-1" asp-action="Delete" asp-route-id="@item.MeetingRoomId">Delete</a>
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

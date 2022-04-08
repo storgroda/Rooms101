@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Rooms101.Models.MeetingViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Meetings</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeetingRoom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Owner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeetingDescription)
+            </th>
+@*            <th>
+                @Html.DisplayNameFor(model => model.CreateMoment)
+            </th>
+*@            <th>
+                @Html.DisplayNameFor(model => model.StartMoment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndMoment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingRoom.MeetingRoomName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingDescription)
+            </td>
+ @*           <td>
+                @Html.DisplayFor(modelItem => item.CreateMoment)
+            </td>
+ *@           <td>
+                @Html.DisplayFor(modelItem => item.StartMoment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndMoment)
+            </td>
+            <td>
+                @if (item.OkToEdit)
+                {
+                    <a class="btn btn-primary mx-2" asp-action="Edit" asp-route-id="@item.MeetingId">Edit</a>
+                }
+                <a class="btn btn-info mx-2" asp-action="Details" asp-route-id="@item.MeetingId">Details</a>
+                @if (item.OkToEdit)
+                {
+                    <a class="btn btn-danger mx-2" asp-action="Delete" asp-route-id="@item.MeetingId">Delete</a>
+                }
+
+                    
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

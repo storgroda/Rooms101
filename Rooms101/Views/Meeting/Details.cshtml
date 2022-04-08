@@ -1,0 +1,79 @@
+﻿@model Rooms101.Models.MeetingViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>Meeting Meeting</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MeetingId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MeetingId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Owner)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MeetingDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MeetingDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MeetingRoom)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MeetingRoom.MeetingRoomName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Attendees)
+        </dt>
+        <dd class = "col-sm-10">
+            @foreach(var attendees in Model.Attendees)
+            {
+                @if(attendees != null && attendees.User != null)
+                {
+                    <span class="btn btn-default">@attendees.User.FullName</span>
+                } 
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreateMoment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreateMoment, "{0:dd/MM/yyyy hh:mm}")
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartMoment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartMoment, "{0:dd/MM/yyyy hh:mm}")
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndMoment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndMoment, "{0:dd/MM/yyyy hh:mm}")
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cancelled)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cancelled)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (Model.OkToEdit)
+    {
+        <a class="btn btn-sm btn-primary mx-1" asp-action="Edit" asp-route-id="@Model?.MeetingId">Edit</a>
+    }
+        <a asp-action="Index">Back to List</a>
+</div>
