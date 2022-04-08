@@ -1,7 +1,7 @@
 Rooms101
 
-
 On startup the following users are created
+
 All Passwords are "NotSecure123!!"
 
 UserName = "admin@project.local"
@@ -21,6 +21,7 @@ UserName = "sarah.cook@project.local"
 FullName = "Sarah Cook"
 
 -- The following meeting rooms are also created
+
 RoomName = "Room 101"
 RoomDescription = "Room 101 : First Floor, East Wing, Holds 8 people."
 
